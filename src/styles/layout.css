@@ -1,0 +1,41 @@
+.app-shell{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #030712;
+}
+
+.app-shell::before{
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(900px 540px at 18% 10%, rgba(56,189,248,.16), transparent 58%),
+    radial-gradient(820px 520px at 82% 14%, rgba(168,85,247,.14), transparent 58%),
+    radial-gradient(780px 580px at 50% 100%, rgba(34,211,238,.08), transparent 62%),
+    linear-gradient(180deg, #020617 0%, #030712 50%, #020617 100%);
+}
+
+.app-shell::after{
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px);
+  background-size: 42px 42px;
+  opacity: .45;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,.75), rgba(0,0,0,.35));
+}
+
+.app-main{
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}

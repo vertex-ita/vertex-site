@@ -1,0 +1,15 @@
+.footer{
+  border-top: 1px solid rgba(255,255,255,.07);
+  background: transparent;
+  margin-top: 24px;
+}
+
+.footer-inner{
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  padding: 18px 22px 26px;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
