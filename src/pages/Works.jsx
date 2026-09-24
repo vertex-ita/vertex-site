@@ -1,105 +1,67 @@
-import React from "react";
-import "../styles/works.css";
-import { projects } from "../data/projects";
+import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { projects, projectCategories, graphicWorks } from "../data/projects";
+import ProjectCard from "../components/ProjectCard";
+import ProjectModal from "../components/ProjectModal";
+import "../styles/works.css";
 
 export default function Works() {
+  const [filter, setFilter] = useState("Tutti");
+  const [activeProject, setActiveProject] = useState(null);
+
+  const filtered = useMemo(
+    () => filter === "Tutti" ? projects : projects.filter((project) => project.category === filter),
+    [filter]
+  );
+
   return (
     <div className="page works-page">
-      <div className="page-head enhanced-head">
-        <span className="eyebrow">Portfolio</span>
-
-        <h1 className="page-title-gradient works-title">
-          <span className="title-line white">Progetti pensati</span>
-          <span className="title-line white">per essere</span>
-          <span className="title-line gradient">belli, chiari e funzionali</span>
-        </h1>
-
-        <p className="muted">
-          Ogni progetto ha un obiettivo: migliorare l’immagine, semplificare un processo
-          o rendere più efficace la comunicazione digitale.
+      <header className="portfolio-head">
+        <span className="eyebrow">Vertex / Selected work</span>
+        <h1>Non vendiamo promesse.<br/><span className="gradient-text">Mostriamo quello che costruiamo.</span></h1>
+        <p>
+          Software interni, strumenti per operations, siti corporate, realtà aumentata e sistemi digitali pensati su esigenze concrete. I progetti riservati vengono raccontati senza esporre dati o accessi dei clienti.
         </p>
-      </div>
+      </header>
 
-      <div className="grid3 works-grid">
-        {projects.map((p) => (
-          <article className={`card work-card ${p.status}`} key={p.id}>
-            <div className="work-media">
-              <img src={p.image} alt={p.title} />
-              <div className="work-overlay" />
-
-              {p.status === "private" && (
-                <div className="lock-pill">Demo riservata</div>
-              )}
-
-              <div className="overlay-text">
-                {p.tags?.[0] || "Progetto digitale"}
-              </div>
-            </div>
-
-            <div className="work-body">
-              <div className="work-top">
-                <div>
-                  <div className="card-title">{p.title}</div>
-                  <div className="muted">{p.subtitle}</div>
-                </div>
-
-                <div className="pill">{p.tags?.[0] || "Progetto"}</div>
-              </div>
-
-              <div className="work-desc muted">{p.description}</div>
-
-              <div className="work-stack">
-                {p.stack.map((s) => (
-                  <span className="chip" key={s}>
-                    {s}
-                  </span>
-                ))}
-              </div>
-
-              <div className="work-actions">
-                {p.link ? (
-                  <a
-                    className="btn primary"
-                    href={p.link}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Apri progetto
-                  </a>
-                ) : (
-                  <Link className="btn primary" to="/contact">
-                    Richiedi demo
-                  </Link>
-                )}
-
-                {p.status === "private" && (
-                  <span className="muted small">Accesso protetto</span>
-                )}
-              </div>
-            </div>
-          </article>
+      <div className="portfolio-filter" role="tablist" aria-label="Filtra progetti">
+        {projectCategories.map((category) => (
+          <button key={category} type="button" className={filter === category ? "active" : ""} onClick={() => setFilter(category)}>{category}</button>
         ))}
       </div>
 
-      <div className="card works-cta">
-        <div>
-          <span className="eyebrow">Il prossimo può essere il tuo</span>
+      <section className="portfolio-grid">
+        {filtered.map((project) => <ProjectCard key={project.id} project={project} onOpen={setActiveProject} />)}
+      </section>
 
-          <div className="card-title">
-            Vuoi un progetto con questo livello di immagine?
+      <section className="section design-portfolio" id="design">
+        <div className="design-portfolio-head">
+          <div>
+            <span className="eyebrow">Graphic & visual design</span>
+            <h2>La parte creativa non è un'aggiunta. <span className="gradient-text">È parte del progetto.</span></h2>
           </div>
-
-          <div className="muted">
-            Partiamo da una struttura forte, un design curato e un’esperienza chiara
-            per il cliente.
+          <div className="design-statement">
+            <strong>Grafici specializzati, risultato controllato.</strong>
+            <p>Locandine, brochure, rendering e materiali visuali vengono progettati e rifiniti con supervisione umana, non affidati a una generazione automatica finale.</p>
           </div>
         </div>
 
-        <Link className="btn primary btn-glow" to="/contact">
-          Richiedi una proposta
-        </Link>
-      </div>
+        <div className="design-work-grid">
+          {graphicWorks.map((item, index) => (
+            <article className={`design-work-card design-${index + 1}`} key={item.title}>
+              <img src={item.image} alt={item.title} loading="lazy" />
+              <div className="design-work-overlay"><span>0{index + 1}</span><div><h3>{item.title}</h3><p>{item.text}</p></div></div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section portfolio-cta">
+        <div><span className="eyebrow">Il prossimo case study può essere il tuo</span><h2>Hai un flusso macchinoso, un progetto fermo o un'immagine da alzare di livello?</h2></div>
+        <Link className="btn primary btn-large" to="/contact">Parliamone <span>↗</span></Link>
+      </section>
+
+      <ProjectModal project={activeProject} onClose={() => setActiveProject(null)} />
     </div>
   );
 }

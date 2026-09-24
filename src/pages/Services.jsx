@@ -1,197 +1,88 @@
 import React from "react";
-import "../styles/services.css";
 import { Link } from "react-router-dom";
+import "../styles/services.css";
 
 const SERVICES = [
   {
-    number: "01",
-    title: "Siti Web",
-    subtitle: "Landing, corporate, eventi e brand digitali",
-    bullets: [
-      "Design premium e mobile-first",
-      "Struttura pensata per convertire",
-      "Sezioni chiare: servizi, valore, portfolio, contatti",
-      "Integrazioni con WhatsApp, mappe, form e analytics",
-    ],
-    highlight:
-      "Perfetto per aziende, locali, professionisti e attività che vogliono presentarsi meglio online.",
+    n: "01", title: "Software & Gestionali", label: "CUSTOM DEVELOPMENT",
+    intro: "Trasformiamo fogli, chat e procedure manuali in strumenti costruiti sul modo in cui lavora davvero la tua azienda.",
+    items: ["Gestionali e web app su misura", "Dashboard, KPI e report", "Ruoli, permessi e aree riservate", "Commesse, ordini, timesheet e workflow", "PDF, export, notifiche e integrazioni", "Database e architetture evolvibili"],
+    ideal: "Per aziende che hanno superato Excel o software generici e vogliono controllo senza adattare il lavoro allo strumento.",
+    tone: "cyan",
   },
   {
-    number: "02",
-    title: "Mini Gestionali",
-    subtitle: "Software semplici per lavorare meglio",
-    bullets: [
-      "Login, ruoli admin/staff e aree riservate",
-      "Dashboard KPI, filtri, calendari e task",
-      "Gestione dati, export CSV/Excel e report",
-      "Database Supabase, API Node.js o soluzioni frontend-only",
-    ],
-    highlight:
-      "Ideale per chi perde tempo con Excel, WhatsApp o fogli sparsi.",
+    n: "02", title: "IT & Cybersecurity", label: "SECURE OPERATIONS",
+    intro: "Un supporto tecnico che guarda insieme operatività, identità, continuità e rischio, senza complicare ciò che può essere semplice.",
+    items: ["Microsoft 365 e ambienti cloud", "Identity, MFA e gestione accessi", "Hardening endpoint e configurazioni", "Backup e continuità operativa", "Analisi criticità e remediation", "Security by design sui nuovi progetti"],
+    ideal: "Per realtà che vogliono un referente IT affidabile e una sicurezza proporzionata ai rischi reali.",
+    tone: "blue",
   },
   {
-    number: "03",
-    title: "Grafica & Design",
-    subtitle: "Identità visiva, social e comunicazione",
-    bullets: [
-      "Brand identity, palette, font e stile coordinato",
-      "Locandine eventi per stampa e social",
-      "Template Instagram e contenuti promozionali",
-      "Grafiche ADV, menù, card e materiale digitale",
-    ],
-    highlight:
-      "Utile per rendere il tuo brand più riconoscibile e professionale.",
-  },
-];
-
-const GRAPHIC_SERVICES = [
-  {
-    title: "Locandine eventi",
-    text: "Grafiche d’impatto per serate, eventi, inaugurazioni e promozioni.",
-    tag: "Eventi",
-    image: "/images/services/locandine.png",
+    n: "03", title: "Web & Digital Experience", label: "WEB PLATFORMS",
+    intro: "Siti corporate, cataloghi e piattaforme che spiegano bene cosa fai, funzionano bene e possono crescere con nuovi servizi.",
+    items: ["Siti corporate e landing", "Cataloghi prodotti e schede tecniche", "SEO tecnico e performance", "Analytics e tracciamento", "Form, CRM e integrazioni", "UI responsive e accessibile"],
+    ideal: "Per aziende che non vogliono un sito-vetrina fermo, ma una base digitale utile a commerciale e clienti.",
+    tone: "violet",
   },
   {
-    title: "Menù e listini",
-    text: "Menù moderni, chiari e coerenti con l’immagine del locale o dell’attività.",
-    tag: "Ristorazione",
-    image: "/images/services/menu.png",
+    n: "04", title: "3D & Realtà Aumentata", label: "IMMERSIVE TECH",
+    intro: "Portiamo prodotti e macchinari fuori dallo schermo con esperienze 3D interattive e visualizzazione AR da smartphone.",
+    items: ["Viewer GLB / 3D", "AR con fotocamera", "Posizionamento a scala reale", "Interazione e rotazione prodotto", "Integrazione nelle schede web", "Ottimizzazione modelli per mobile"],
+    ideal: "Per industria, interior, prodotto e commerciale tecnico quando dimensioni e ingombri contano quanto la scheda tecnica.",
+    tone: "pink",
   },
   {
-    title: "Grafiche social",
-    text: "Post, stories, copertine e contenuti visivi pensati per comunicare meglio online.",
-    tag: "Social",
-    image: "/images/services/social.png",
+    n: "05", title: "Automazioni & Data", label: "SMART WORKFLOW",
+    intro: "Riduciamo operazioni ripetitive collegando dati, notifiche, documenti e sistemi in flussi più affidabili.",
+    items: ["Automazioni operative", "Sincronizzazione dati", "Generazione documenti", "Controlli e validazioni", "Import ed export strutturati", "Integrazioni API"],
+    ideal: "Per team che perdono tempo in passaggi copiati a mano e controlli che una macchina può eseguire meglio.",
+    tone: "green",
   },
   {
-    title: "Materiale promozionale",
-    text: "Flyer, card, voucher e grafiche coordinate per rafforzare il tuo brand.",
-    tag: "Brand",
-    image: "/images/services/promo.png",
-  },
-  {
-    title: "Loghi e identità visiva",
-    text: "Creazione di loghi, palette colori e materiali coordinati per un’immagine più professionale.",
-    tag: "Brand",
-    image: "/images/services/logo.png",
-  },
-  {
-    title: "Foto per sito web",
-    text: "Immagini di alta qualità per presentare il tuo brand in modo professionale.",
-    tag: "Web",
-    image: "/images/services/foto-web.png",
+    n: "06", title: "Grafica, Brand & Rendering", label: "HUMAN-LED DESIGN",
+    intro: "Una produzione visuale professionale per aziende, eventi e brand che non vogliono sembrare intercambiabili.",
+    items: ["Locandine e campagne evento", "Brochure, cataloghi e presentazioni", "Menu, listini e materiale stampa", "Brand identity e sistemi visuali", "Rendering e mockup", "Social kit e advertising"],
+    ideal: "Composizione e finitura sono curate da grafici specializzati: i materiali finali non vengono delegati a una generazione automatica.",
+    tone: "magenta",
   },
 ];
 
 export default function Services() {
   return (
     <div className="page services-page">
-      <div className="page-head enhanced-head">
-        <span className="eyebrow">Servizi Vertex</span>
+      <header className="services-head">
+        <span className="eyebrow">Capabilities / Vertex</span>
+        <h1>Dalla rete alla brand identity.<br/><span className="gradient-text">Un partner, competenze diverse.</span></h1>
+        <p>Quando un'azienda cresce, IT, software, web e comunicazione iniziano a toccarsi continuamente. Vertex nasce proprio per evitare che ogni pezzo viva isolato dagli altri.</p>
+      </header>
 
-        <h1 className="page-title-gradient services-title">
-          <span className="title-line white">Soluzioni digitali</span>
-          <span className="title-line white">che rendono il tuo</span>
-          <span className="title-line gradient">brand più grande</span>
-        </h1>
-
-        <p className="muted">
-          Creiamo siti, gestionali e grafiche con un’impostazione moderna, tech e commerciale:
-          ogni progetto deve essere bello, chiaro e utile al cliente finale.
-        </p>
+      <div className="service-index">
+        {SERVICES.map((service) => <a href={`#service-${service.n}`} key={service.n}><span>{service.n}</span>{service.title}</a>)}
       </div>
 
-      <div className="services-grid">
-        {SERVICES.map((s) => (
-          <article className="card service-card" key={s.title}>
-            <div className="service-number">{s.number}</div>
-
-            <div className="service-top">
-              <div>
-                <div className="card-title">{s.title}</div>
-                <div className="muted">{s.subtitle}</div>
-              </div>
-
-              <div className="service-badge">Vertex</div>
-            </div>
-
-            <ul className="service-list">
-              {s.bullets.map((b) => (
-                <li key={b}>{b}</li>
-              ))}
-            </ul>
-
-            <div className="service-highlight">{s.highlight}</div>
-
-            <div className="service-actions">
-              <Link className="btn primary" to="/contact">
-                Richiedi preventivo
-              </Link>
-
-              <Link className="btn ghost" to="/works">
-                Vedi progetti
-              </Link>
-            </div>
-          </article>
-        ))}
-      </div>
-
-      <section className="card services-graphic-intro">
-        <div className="services-graphic-content">
-          <span className="eyebrow">Grafica e comunicazione visiva</span>
-
-          <h2>
-            Non solo siti e applicazioni. Creiamo anche grafiche che fanno notare il tuo brand.
-          </h2>
-
-          <p className="muted">
-            Realizziamo materiali grafici per aziende, locali, eventi e attività commerciali:
-            locandine, menù, flyer, grafiche social, listini, loghi e contenuti coordinati
-            per dare un’immagine più professionale e riconoscibile.
-          </p>
-        </div>
-
-        <div className="services-graphic-highlight">
-          <span>Design</span>
-          <strong>moderno</strong>
-        </div>
-      </section>
-
-      <section className="graphic-services-grid">
-        {GRAPHIC_SERVICES.map((item) => (
-          <article className="card graphic-service-card" key={item.title}>
-            <div className="graphic-service-media">
-              <img src={item.image} alt={item.title} />
-              <div className="graphic-service-media-overlay" />
-              <span className="graphic-service-badge">{item.tag}</span>
-            </div>
-
-            <div className="graphic-service-body">
-              <h3>{item.title}</h3>
-              <p className="muted">{item.text}</p>
-            </div>
+      <section className="services-list">
+        {SERVICES.map((service) => (
+          <article className={`service-row ${service.tone}`} id={`service-${service.n}`} key={service.n}>
+            <div className="service-row-index"><span>{service.n}</span><small>{service.label}</small></div>
+            <div className="service-row-main"><h2>{service.title}</h2><p className="service-intro">{service.intro}</p><div className="service-ideal"><span>Quando serve</span><p>{service.ideal}</p></div></div>
+            <div className="service-row-list">{service.items.map((item) => <div key={item}><i>+</i>{item}</div>)}</div>
           </article>
         ))}
       </section>
 
-      <div className="card service-cta">
-        <div>
-          <span className="eyebrow">Primo step</span>
-
-          <div className="card-title">
-            Vuoi capire costo, tempi e soluzione migliore?
-          </div>
-
-          <div className="muted">
-            Scrivimi cosa vuoi ottenere: ti aiuto a scegliere la strada più efficace,
-            senza complicare il progetto inutilmente.
-          </div>
+      <section className="section services-principles">
+        <div className="section-heading"><span className="eyebrow">Come lavoriamo</span><h2>Tre principi che valgono <span className="gradient-text">in ogni progetto.</span></h2></div>
+        <div className="principles-grid">
+          <div><span>01</span><h3>Su misura, ma mantenibile.</h3><p>Niente complessità fine a se stessa. Costruiamo ciò che serve e lasciamo una base leggibile per evolvere.</p></div>
+          <div><span>02</span><h3>Sicurezza by design.</h3><p>Accessi, dati, ruoli e continuità non vengono aggiunti alla fine: fanno parte delle decisioni iniziali.</p></div>
+          <div><span>03</span><h3>Forma e funzione insieme.</h3><p>Una soluzione che funziona ma è frustrante da usare è incompleta. UX e qualità visuale sono parte del risultato.</p></div>
         </div>
+      </section>
 
-        <Link className="btn primary btn-glow" to="/contact">
-          Parliamo del progetto
-        </Link>
-      </div>
+      <section className="section services-cta">
+        <div><span className="eyebrow">Non sai ancora quale servizio ti serve?</span><h2>Raccontaci dove perdi tempo, dove hai rischio o dove vuoi crescere.</h2><p>Partiamo dal problema e scegliamo insieme la strada tecnica giusta.</p></div>
+        <Link className="btn primary btn-large" to="/contact">Fissa un primo confronto <span>↗</span></Link>
+      </section>
     </div>
   );
 }
